@@ -1,0 +1,701 @@
+<Window
+	x:Class="ATWITCHBC.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:ATWITCHBC"
+	Title="MainWindow"
+	Height="585.667"
+	Width="529"
+	Background="#FF000000"
+	WindowStyle="None"
+	ResizeMode="NoResize">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<LinearGradientBrush
+				StartPoint="0,0"
+				EndPoint="0,1"
+				x:Key="CheckedBlue">
+				<GradientStop
+					Color="#FF22AA41"
+					Offset="0" />
+				<GradientStop
+					Color="#FF04A21A"
+					Offset="0.1" />
+				<GradientStop
+					Color="#FF31AE53"
+					Offset="1" />
+			</LinearGradientBrush>
+			<LinearGradientBrush
+				StartPoint="0,0"
+				EndPoint="0,1"
+				x:Key="CheckedOrange">
+				<GradientStop
+					Color="#FF22AA41"
+					Offset="0" />
+				<GradientStop
+					Color="#FF04A21A"
+					Offset="0.1" />
+				<GradientStop
+					Color="#FF31AE53"
+					Offset="1" />
+			</LinearGradientBrush>
+			<SolidColorBrush
+				Color="#FF1CA24D"
+				x:Key="CheckedOrangeBorder" />
+			<SolidColorBrush
+				Color="#FF143874"
+				x:Key="CheckedBlueBorder" />
+			<Style
+				TargetType="{x:Type CheckBox}"
+				x:Key="OrangeSwitchStyle">
+				<Setter
+					Property="Foreground"
+					Value="{DynamicResource SystemColors.WindowTextBrushKey}" />
+				<Setter
+					Property="Background"
+					Value="{DynamicResource SystemColors.WindowBrushKey}" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type CheckBox}">
+							<FrameworkTemplate.Resources>
+								<ResourceDictionary>
+									<Storyboard
+										x:Key="OnChecking">
+										<DoubleAnimationUsingKeyFrames
+											BeginTime="00:00:00"
+											Storyboard.TargetName="slider"
+											Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+											<SplineDoubleKeyFrame
+												KeyTime="00:00:00.1000000"
+												Value="30" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+									<Storyboard
+										x:Key="OnUnchecking">
+										<DoubleAnimationUsingKeyFrames
+											BeginTime="00:00:00"
+											Storyboard.TargetName="slider"
+											Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+											<SplineDoubleKeyFrame
+												KeyTime="00:00:00.1000000"
+												Value="0" />
+										</DoubleAnimationUsingKeyFrames>
+									</Storyboard>
+								</ResourceDictionary>
+							</FrameworkTemplate.Resources>
+							<DockPanel
+								Name="dockPanel"
+								Margin="0,0,0,0">
+								<ContentPresenter
+									SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+									Content="{TemplateBinding Content}"
+									ContentStringFormat="{TemplateBinding ContentStringFormat}"
+									ContentTemplate="{TemplateBinding ContentTemplate}"
+									RecognizesAccessKey="True"
+									VerticalAlignment="Center" />
+								<Grid>
+									<Border
+										Name="BackgroundBorder"
+										BorderBrush="#FF333337"
+										BorderThickness="1"
+										CornerRadius="1"
+										Height="15"
+										Width="Auto"
+										Margin="2,0,0,0">
+										<Border.Background>
+											<LinearGradientBrush
+												StartPoint="0,0"
+												EndPoint="0,1">
+												<GradientStop
+													Color="#FF333337"
+													Offset="0" />
+												<GradientStop
+													Color="#FF333337"
+													Offset="0.1" />
+												<GradientStop
+													Color="#FF333337"
+													Offset="0.5" />
+												<GradientStop
+													Color="#FF333337"
+													Offset="0.5" />
+												<GradientStop
+													Color="#FF333337"
+													Offset="1" />
+											</LinearGradientBrush>
+										</Border.Background>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition />
+												<ColumnDefinition />
+											</Grid.ColumnDefinitions>
+											<TextBlock
+												Name="Off"
+												Text="OFF"
+												Width="28"
+												Height="14"
+												TextAlignment="Center"
+												Foreground="#FFFF0000"
+												Grid.Column="1"
+												HorizontalAlignment="Right"
+												VerticalAlignment="Center"
+												Margin="0,0,0,1" />
+											<TextBlock
+												Name="ON"
+												Text="ON"
+												Width="28"
+												Height="14"
+												TextAlignment="Center"
+												Foreground="#FF43C71C"
+												Grid.Column="0"
+												HorizontalAlignment="Left"
+												VerticalAlignment="Center"
+												Margin="0,0,0,1" />
+										</Grid>
+									</Border>
+									<Border
+										Name="slider"
+										BorderBrush="#FFB62F2F"
+										HorizontalAlignment="Left"
+										Width="30"
+										Height="15"
+										BorderThickness="1"
+										CornerRadius="1"
+										RenderTransformOrigin="0.5,0.5"
+										Margin="2,0,0,0">
+										<UIElement.RenderTransform>
+											<TransformGroup>
+												<ScaleTransform
+													ScaleX="1"
+													ScaleY="1" />
+												<SkewTransform
+													AngleX="0"
+													AngleY="0" />
+												<RotateTransform
+													Angle="0" />
+												<TranslateTransform
+													X="0"
+													Y="0" />
+											</TransformGroup>
+										</UIElement.RenderTransform>
+										<Border.Background>
+											<LinearGradientBrush
+												EndPoint="0,1"
+												StartPoint="0,0">
+												<GradientStop
+													Color="#FFAA2222"
+													Offset="0" />
+												<GradientStop
+													Color="#FFA20404"
+													Offset="0.1" />
+												<GradientStop
+													Color="#FFCF3434"
+													Offset="1" />
+											</LinearGradientBrush>
+										</Border.Background>
+									</Border>
+								</Grid>
+							</DockPanel>
+							<ControlTemplate.Triggers>
+								<Trigger
+									Property="ToggleButton.IsChecked"
+									Value="True">
+									<TriggerBase.ExitActions>
+										<BeginStoryboard
+											Name="OnUnchecking_BeginStoryboard"
+											Storyboard="{StaticResource OnUnchecking}" />
+									</TriggerBase.ExitActions>
+									<TriggerBase.EnterActions>
+										<BeginStoryboard
+											Name="OnChecking_BeginStoryboard"
+											Storyboard="{StaticResource OnChecking}" />
+									</TriggerBase.EnterActions>
+									<Setter
+										TargetName="slider"
+										Property="Background"
+										Value="{StaticResource CheckedOrange}" />
+									<Setter
+										TargetName="slider"
+										Property="BorderBrush"
+										Value="{StaticResource CheckedOrangeBorder}" />
+								</Trigger>
+								<Trigger
+									Property="IsEnabled"
+									Value="False" />
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<Grid
+		Name="test"
+		Background="#FF252526"
+		Height="611"
+		VerticalAlignment="Top"
+		MouseDown="test_MouseDown">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<ListBox
+			Name="Common"
+			HorizontalAlignment="Left"
+			Height="337"
+			Margin="10,38,0,0"
+			VerticalAlignment="Top"
+			Width="153"
+			Background="#FF333337"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			BorderBrush="{x:Null}"
+			SelectionChanged="Common_SelectionChanged_1" />
+		<TextBox
+			Name="NickName"
+			ToolTip="Ник"
+			HorizontalAlignment="Left"
+			Height="24"
+			Margin="168,40,0,0"
+			TextWrapping="Wrap"
+			VerticalContentAlignment="Center"
+			VerticalAlignment="Top"
+			Width="351"
+			Text="Arthas"
+			BorderBrush="#FF4A4A4F"
+			Foreground="#FFFFFFFF"
+			Background="#FF4A4A4F"
+			ClipToBounds="True" />
+		<Button
+			Name="ConnectBTN"
+			Style="{StaticResource Exit}"
+			Content="Connect"
+			HorizontalAlignment="Left"
+			Margin="168,69,0,0"
+			VerticalAlignment="Top"
+			Width="97"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Click="ConnectBTN_Click">
+			<Control.Background>
+				<SolidColorBrush
+					Color="#FF333337" />
+			</Control.Background>
+		</Button>
+		<TextBox
+			Name="ChatBotsCount"
+			ToolTip="Количество чат-ботов"
+			HorizontalAlignment="Left"
+			Height="24"
+			Margin="270,69,0,0"
+			TextWrapping="Wrap"
+			Text="1"
+			VerticalContentAlignment="Center"
+			VerticalAlignment="Top"
+			Width="232"
+			Background="#FF4A4A4F"
+			Foreground="#FFFFFFF9"
+			BorderBrush="#FF4A4A4F"
+			PreviewTextInput="NumberValidationTextBox"
+			TextChanged="ChatBotsCount_TextChanged" />
+		<TextBox
+			HorizontalAlignment="Left"
+			Height="412"
+			Margin="529,38,0,0"
+			TextWrapping="Wrap"
+			VerticalAlignment="Top"
+			Width="238"
+			Background="#FF333337"
+			IsReadOnly="True"
+			BorderBrush="{x:Null}" />
+		<Button
+			Name="Down"
+			Style="{StaticResource Exit}"
+			HorizontalAlignment="Left"
+			Margin="502,81,0,0"
+			VerticalAlignment="Top"
+			Width="17"
+			Height="12"
+			FontSize="6"
+			Content="▼"
+			BorderThickness="0,1,1,1"
+			Background="#FF333337"
+			Foreground="#FFFFFFFF"
+			BorderBrush="#FF333337"
+			Click="Down_Click" />
+		<Button
+			Name="ValueUp"
+			Style="{StaticResource Exit}"
+			Content="▲"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Width="17"
+			Height="12"
+			FontSize="6"
+			Margin="502,69,0,0"
+			BorderThickness="0,1,1,1"
+			Foreground="#FFF2F2F2"
+			Background="#FF333337"
+			BorderBrush="#FF333337"
+			Click="ValueUp_Click" />
+		<Button
+			Name="LoadChatBots"
+			Style="{StaticResource Exit}"
+			Content="Load chat-bots"
+			HorizontalAlignment="Left"
+			Margin="168,98,0,0"
+			VerticalAlignment="Top"
+			Width="351"
+			Height="24"
+			Background="#FF333337"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Click="LoadChatBots_Click" />
+		<Button
+			Name="ShowLogs"
+			Style="{StaticResource Exit}"
+			Content="Show logs"
+			HorizontalAlignment="Left"
+			Margin="168,127,0,0"
+			VerticalAlignment="Top"
+			Width="351"
+			Height="24"
+			Background="#FF333337"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Click="ShowLogs_Click" />
+		<DockPanel
+			Height="28"
+			LastChildFill="False"
+			VerticalAlignment="Top"
+			Background="#FF1C1C1D">
+			<Button
+				Name="Exit"
+				Content="×"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Width="31"
+				Height="28"
+				FontFamily="SimSun"
+				FontWeight="ExtraBlack"
+				Style="{StaticResource Exit}"
+				Foreground="#FFBDB2B2"
+				Background="#FF1C1C1D"
+				ForceCursor="True"
+				DockPanel.Dock="Right"
+				BorderBrush="{x:Null}"
+				Click="Exit_Click" />
+			<Button
+				Name="ToLowBTN"
+				Content="□"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Width="31"
+				Height="28"
+				FontFamily="SimSun"
+				FontWeight="ExtraBlack"
+				Style="{StaticResource Exit}"
+				Foreground="#FFBDB2B2"
+				Background="#FF1C1C1D"
+				ForceCursor="True"
+				DockPanel.Dock="Right"
+				BorderBrush="{x:Null}"
+				Click="ToLowBTN_Click" />
+		</DockPanel>
+		<Label
+			Name="statuslbl"
+			Content="Status:"
+			HorizontalAlignment="Left"
+			Margin="168,156,0,0"
+			VerticalAlignment="Top"
+			Width="351"
+			Foreground="#FFF75252" />
+		<StackPanel
+			HorizontalAlignment="Left"
+			Height="188"
+			Margin="168,187,0,0"
+			VerticalAlignment="Top"
+			Width="351"
+			Background="#FF333337"
+			IsManipulationEnabled="True">
+			<TextBox
+				Name="CustomMSGTXTBX"
+				Height="54"
+				TextWrapping="Wrap"
+				Text="YourCustomMessage"
+				Margin="7,127,7,0"
+				Background="#FF4A4A4F"
+				BorderBrush="#FF4A4A4F"
+				Foreground="#FFFFFFFF" />
+		</StackPanel>
+		<Label
+			Name="CBname"
+			ToolTip="Кликни 2 раза, чтобы скопировать ник и oauth"
+			Content="Name:"
+			HorizontalAlignment="Left"
+			Margin="172,192,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFE2DEDE"
+			MouseDoubleClick="CBname_MouseDoubleClick" />
+		<Label
+			Name="CBauth"
+			ToolTip="Кликни 2 раза, чтобы скопировать ник и oauth"
+			Content="OAUTH:"
+			HorizontalAlignment="Left"
+			Margin="172,218,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFE2DEDE"
+			MouseDoubleClick="CBauth_MouseDoubleClick" />
+		<Button
+			Name="ConnectBTN_Custom"
+			Style="{StaticResource Exit}"
+			Content="Connect"
+			HorizontalAlignment="Left"
+			Margin="172,276,0,0"
+			VerticalAlignment="Top"
+			Width="98"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF252526"
+			Click="ConnectBTN_Custom_Click" />
+		<Button
+			Name="Disconnect_BTN"
+			ToolTip="Я не работаю, кек"
+			Style="{StaticResource Exit}"
+			Content="Disconnect"
+			HorizontalAlignment="Left"
+			Margin="275,276,0,0"
+			VerticalAlignment="Top"
+			Width="97"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF252526"
+			Click="Disconnect_BTN_Click" />
+		<Label
+			Name="CBstatus0"
+			Content="Status:"
+			HorizontalAlignment="Left"
+			Margin="172,244,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFE2DEDE" />
+		<TextBox
+			Name="log"
+			HorizontalAlignment="Left"
+			Height="507"
+			Margin="529,38,-238,0"
+			TextWrapping="Wrap"
+			VerticalAlignment="Top"
+			Width="238"
+			Background="#FF333337"
+			IsReadOnly="True"
+			Foreground="#FFE6E6E6"
+			VerticalScrollBarVisibility="Visible"
+			BorderBrush="{x:Null}" />
+		<Button
+			Name="SendCustomMSGBTN"
+			Style="{StaticResource Exit}"
+			Content="Send custom message"
+			HorizontalAlignment="Left"
+			Margin="377,276,0,0"
+			VerticalAlignment="Top"
+			Width="136"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF252526"
+			Click="SendCustomMSGBTN_Click" />
+		<Label
+			Name="CBstatus"
+			Content=""
+			HorizontalAlignment="Left"
+			Margin="211,244,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFE2DEDE" />
+		<TextBox
+			Name="Messages"
+			HorizontalAlignment="Left"
+			Height="165"
+			Margin="10,380,0,0"
+			TextWrapping="Wrap"
+			VerticalAlignment="Top"
+			Width="237"
+			Background="#FF333337"
+			Foreground="#FFE6E6E6"
+			VerticalScrollBarVisibility="Visible"
+			AcceptsReturn="True"
+			BorderBrush="{x:Null}" />
+		<Button
+			Name="LoadWords"
+			Style="{StaticResource Exit}"
+			Content="Load text"
+			HorizontalAlignment="Left"
+			Margin="252,380,0,0"
+			VerticalAlignment="Top"
+			Width="106"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF333337"
+			Click="LoadWords_Click" />
+		<Button
+			Name="StartSpam"
+			Style="{StaticResource Exit}"
+			Content="Start spam"
+			HorizontalAlignment="Left"
+			Margin="252,409,0,0"
+			VerticalAlignment="Top"
+			Width="106"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF333337"
+			Click="StartSpam_Click" />
+		<CheckBox
+			Name="RandomCheck"
+			Content="Random"
+			Style="{DynamicResource OrangeSwitchStyle}"
+			HorizontalAlignment="Left"
+			Margin="252,438,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFFFFFFF"
+			Width="106"
+			Height="17"
+			Background="{x:Null}"
+			BorderBrush="{x:Null}" />
+		<Button
+			Content="ATwitch.ru"
+			Style="{StaticResource Exit}"
+			HorizontalAlignment="Left"
+			Margin="449,526,0,0"
+			VerticalAlignment="Top"
+			Width="75"
+			Background="#FF252526"
+			BorderBrush="#FF252526"
+			Foreground="#FFF38415"
+			Height="24"
+			Click="Button_Click" />
+		<TextBox
+			Name="Interval"
+			ToolTip="Интервал между сообщениями в секундах"
+			HorizontalAlignment="Left"
+			Height="24"
+			Margin="252,460,0,0"
+			TextWrapping="Wrap"
+			Text="1"
+			VerticalContentAlignment="Center"
+			VerticalAlignment="Top"
+			Width="89"
+			Background="#FF4A4A4F"
+			Foreground="#FFFFFFF9"
+			BorderBrush="#FF4A4A4F"
+			PreviewTextInput="NumberValidationTextBox"
+			TextChanged="ChatBotsCount_TextChanged" />
+		<Button
+			Name="Down_Copy"
+			Style="{StaticResource Exit}"
+			HorizontalAlignment="Left"
+			Margin="341,472,0,0"
+			VerticalAlignment="Top"
+			Width="17"
+			Height="12"
+			FontSize="6"
+			Content="▼"
+			BorderThickness="0,1,1,1"
+			Background="#FF333337"
+			Foreground="#FFFFFFFF"
+			BorderBrush="#FF333337"
+			Click="Down_Click" />
+		<Button
+			Name="ValueUp_Copy"
+			Style="{StaticResource Exit}"
+			Content="▲"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Width="17"
+			Height="12"
+			FontSize="6"
+			Margin="341,460,0,0"
+			BorderThickness="0,1,1,1"
+			Foreground="#FFF2F2F2"
+			Background="#FF333337"
+			BorderBrush="#FF333337"
+			Click="ValueUp_Click" />
+		<Button
+			Name="SaveTextBTN"
+			Style="{StaticResource Exit}"
+			Content="Save text"
+			HorizontalAlignment="Left"
+			Margin="252,489,0,0"
+			VerticalAlignment="Top"
+			Width="106"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF333337"
+			Click="SaveTextBTN_Click" />
+		<TextBox
+			Name="MinutesTB"
+			ToolTip="Ник"
+			HorizontalAlignment="Left"
+			Height="24"
+			Margin="449,380,0,0"
+			TextWrapping="Wrap"
+			VerticalContentAlignment="Center"
+			VerticalAlignment="Top"
+			Width="70"
+			Text="60"
+			BorderBrush="#FF4A4A4F"
+			Foreground="#FFFFFFFF"
+			Background="#FF4A4A4F"
+			ClipToBounds="True"
+			TextChanged="MinutesTB_TextChanged" />
+		<Button
+			Name="CloseBTN"
+			Style="{StaticResource Exit}"
+			Content="Close"
+			HorizontalAlignment="Left"
+			Margin="449,409,0,0"
+			VerticalAlignment="Top"
+			Width="70"
+			Height="24"
+			BorderBrush="#FF333337"
+			Foreground="#FFFFFFFF"
+			Background="#FF333337"
+			Click="CloseBTN_Click" />
+		<Label
+			Name="RemainingLabel"
+			Content="Remaining: 60"
+			HorizontalAlignment="Left"
+			HorizontalContentAlignment="Right"
+			Margin="368,442,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFFFFFFF"
+			Width="156" />
+		<CheckBox
+			Name="ProxyUsageCB"
+			Content="Proxy"
+			Style="{DynamicResource OrangeSwitchStyle}"
+			HorizontalAlignment="Left"
+			Margin="10,554,0,0"
+			VerticalAlignment="Top"
+			Foreground="#FFFFFFFF"
+			Width="90"
+			Height="17"
+			Background="{x:Null}"
+			BorderBrush="{x:Null}" />
+		<TextBox
+			Name="ProxyLinkTB"
+			ToolTip="Ник"
+			HorizontalAlignment="Left"
+			Height="24"
+			Margin="105,550,0,0"
+			TextWrapping="Wrap"
+			VerticalContentAlignment="Center"
+			VerticalAlignment="Top"
+			Width="408"
+			BorderBrush="#FF4A4A4F"
+			Foreground="#FFFFFFFF"
+			Background="#FF4A4A4F"
+			ClipToBounds="True"
+			TextChanged="ProxyLinkTB_TextChanged" />
+	</Grid>
+</Window>
